@@ -2,7 +2,7 @@ rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(su
 
 CC := g++
 SOURCES := $(call rwildcard,src,*.cpp)
-OBJS :=$(SOURCES:.cpp=.o)
+OBJS := $(SOURCES:.cpp=.o)
 HEADERS := include
 SDL2FLAGS != pkg-config SDL2 --libs --cflags
 EXECUTABLE := app
@@ -15,3 +15,6 @@ $(EXECUTABLE): $(OBJS)
 
 .cpp.o:
 	$(CC) -I$(HEADERS) -c $< -o $@
+
+clean:
+	del $(subst /,\, $(OBJS))
