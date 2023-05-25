@@ -7,6 +7,7 @@ int main(int argc, char **argv)
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     WindowSDL wnd;
+    wnd.change_title("haha");
     wnd.get_graphics().clear();
     wnd.get_graphics().draw_line({{0, 0}, {500, 500}});
     wnd.get_graphics().present();

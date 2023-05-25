@@ -3,18 +3,15 @@
 
 #include <string>
 
-#include "Graphics.hpp"
 #include "Window.hpp"
 
 class Game
 {
 private:
-    Window wnd;
-    //Graphics graphics;
+    std::unique_ptr<Window> window;
 
 public:
     Game();
     void run();
     
- 
 };
