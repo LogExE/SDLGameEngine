@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "GameContext.hpp"
+#include "WindowSDL.hpp"
 
 class GameContextSDL : public GameContext
 {
