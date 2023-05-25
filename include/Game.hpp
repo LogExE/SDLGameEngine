@@ -3,15 +3,15 @@
 
 #include <string>
 
-#include "Window.hpp"
+#include "GameContext.hpp"
 
 class Game
 {
 private:
-    std::unique_ptr<Window> window;
+    std::unique_ptr<GameContext> m_gctx;
 
 public:
-    Game();
+    Game(std::unique_ptr<GameContext> window);
     void run();
     
 };

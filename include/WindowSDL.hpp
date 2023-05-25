@@ -17,5 +17,4 @@ public:
     ~WindowSDL();
 
     void change_title(const std::string &title);
-    std::string get_title();
 };

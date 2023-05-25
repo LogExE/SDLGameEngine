@@ -1,17 +1,15 @@
 
 #include <SDL2/SDL.h>
 
-#include "WindowSDL.hpp"
+#include <memory>
+
+#include "Game.hpp"
+#include "GameContextSDL.hpp"
 
 int main(int argc, char **argv)
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
-    WindowSDL wnd;
-    wnd.change_title("haha");
-    wnd.get_graphics().clear();
-    wnd.get_graphics().draw_line({{0, 0}, {500, 500}});
-    wnd.get_graphics().present();
-    SDL_Delay(1000);
-    SDL_Quit();
+    Game game(std::make_unique<GameContextSDL>());
+    game.run();
+    
     return 0;
 }
