@@ -4,16 +4,17 @@
 #include <string>
 
 #include "Graphics.hpp"
+#include "Window.hpp"
 
 class Game
 {
 private:
-    std::string m_window_title;
+    Window wnd;
     //Graphics graphics;
 
 public:
     Game();
     void run();
-    void change_title(const std::string &new_title);
+    
  
 };

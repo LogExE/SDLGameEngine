@@ -21,5 +21,5 @@ public:
     //virtual void draw_sprite() = 0;
 
     void present();
-    void clear(Color cl_color);
+    void clear(Color cl_color = Color::white);
 };

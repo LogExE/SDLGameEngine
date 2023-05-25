@@ -1,5 +1,7 @@
+rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
+
 CC := g++
-OBJS := $(wildcard src/*.cpp)
+OBJS := $(call rwildcard,src,*.cpp)
 HEADERS := include
 SDL2FLAGS != pkg-config SDL2 --libs --cflags
 EXECUTABLE := app

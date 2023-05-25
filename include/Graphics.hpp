@@ -14,7 +14,7 @@ protected:
     bool m_vsync;
     Color m_draw_col;
 public:
-    Graphics() : m_draw_col(Color::white), m_vsync(false) {}
+    Graphics() : m_draw_col(Color::black), m_vsync(false) {}
     virtual ~Graphics() = 0;
 
     virtual void toggle_vsync()
