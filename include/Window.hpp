@@ -3,12 +3,17 @@
 
 #include <string>
 
+#include "Graphics.hpp"
+#include <memory>
+
 class Window
 {
-private:
+protected:
     std::string m_title;
+    std::unique_ptr<Graphics> m_graphics;
 public:
-    Window();
+    const static std::string DEFAULT_TITLE;
+    Window() {}
     virtual ~Window() = 0;
 
     virtual void change_title(const std::string &title)
@@ -18,5 +23,9 @@ public:
     std::string get_title() 
     {
         return m_title;
+    }
+    Graphics& get_graphics()
+    {
+        return *m_graphics;
     }
 };

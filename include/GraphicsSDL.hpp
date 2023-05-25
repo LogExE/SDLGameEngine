@@ -5,13 +5,13 @@
 
 #include "Graphics.hpp"
 
-class SDLGraphics : Graphics
+class GraphicsSDL : public Graphics
 {
 private:
     SDL_Renderer *m_rendr;
 public:
-    SDLGraphics(SDL_Window *wnd);
-    ~SDLGraphics();
+    GraphicsSDL(SDL_Window *wnd);
+    ~GraphicsSDL();
 
     void toggle_vsync();
     void set_draw_color(Color color);
