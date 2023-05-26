@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "core/Graphics.hpp"
+class Graphics;
 
 class Drawable
 {
@@ -11,5 +11,5 @@ public:
     Drawable() {}
     virtual ~Drawable() = 0;
 
-    virtual void draw(std::unique_ptr<Graphics> graphics) = 0;
+    virtual void draw(Graphics &graphics) = 0;
 };
