@@ -30,5 +30,5 @@ public:
     }
 
     SDL_Texture* get_texture(const std::string &name);
-    
+    inline const static std::string ASSETS_FOLDER = "assets";
 };

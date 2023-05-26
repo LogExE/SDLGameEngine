@@ -8,9 +8,9 @@
 class GameObject : public Drawable
 {
 protected:
-    float x, y;
+    float x = 0, y = 0;
     std::map<std::string, Animation> m_anims;
-    std::string m_cur_anim = "idle";
+    std::string m_cur_anim = ANIM_IDLE;
     float m_anim_tick = 0;
     bool m_flipped = false;
     Animation& get_current_animation()
@@ -51,4 +51,6 @@ public:
         dest.h = frame.h;
         SDL_RenderCopyExF(rnd, anim.get_texture(), &frame, &dest, 0, nullptr, m_flipped ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE);
     }
+
+    inline const static std::string ANIM_IDLE = "idle";
 };

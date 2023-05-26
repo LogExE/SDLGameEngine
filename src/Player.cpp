@@ -9,5 +9,5 @@ Player::Player(Game &game)
 
 void Player::update(float dt)
 {
-    x += dt * MAX_XSPEED;
+    //x += dt * MAX_XSPEED;
 }

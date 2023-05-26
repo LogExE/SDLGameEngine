@@ -6,6 +6,7 @@ Game::Game()
     IMG_Init(IMG_INIT_PNG);
     m_wnd = SDL_CreateWindow("mario", 500, 500, 1024, 768, SDL_WINDOW_SHOWN);
     m_rnd = SDL_CreateRenderer(m_wnd, -1, SDL_RENDERER_ACCELERATED);
+    SDL_RenderSetLogicalSize(m_rnd, 256, 240);
 }
 
 Game::~Game()
@@ -24,6 +25,8 @@ void Game::run()
     double deltaTime = 0;
 
     Player plr(*this);
+
+    SDL_SetRenderDrawColor(m_rnd, 255, 255, 255, 255);
     while (running)
     {
         LAST = NOW;
@@ -36,7 +39,12 @@ void Game::run()
                 running = false;
         }
         plr.update(deltaTime); 
+
+        SDL_RenderClear(m_rnd);
+
         plr.draw(m_rnd);
+
+        SDL_RenderPresent(m_rnd);
     }
 }
 
@@ -44,7 +52,9 @@ SDL_Texture *Game::get_texture(const std::string &name)
 {
     if (m_txtrs.find(name) == m_txtrs.end())
     {
-        m_txtrs[name] = IMG_LoadTexture(m_rnd, name.c_str());
+        m_txtrs[name] = IMG_LoadTexture(m_rnd, (ASSETS_FOLDER + "/" + name).c_str());
+        if (!m_txtrs[name])
+            SDL_Log("Failed to load %s", name.c_str());
     }
     return m_txtrs[name];
 }
