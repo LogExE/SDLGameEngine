@@ -5,8 +5,8 @@
 
 #include <memory>
 
-#include "Window.hpp"
-#include "GraphicsSDL.hpp"
+#include "core/Window.hpp"
+#include "core/impl/GraphicsSDL.hpp"
 
 class WindowSDL : public Window
 {

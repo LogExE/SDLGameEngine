@@ -1,5 +1,5 @@
 
-#include "GraphicsSDL.hpp"
+#include "core/impl/GraphicsSDL.hpp"
 
 GraphicsSDL::GraphicsSDL(SDL_Window *wnd)
 {

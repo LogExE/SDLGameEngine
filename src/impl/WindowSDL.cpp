@@ -1,5 +1,5 @@
 
-#include "WindowSDL.hpp"
+#include "core/impl/WindowSDL.hpp"
 
 WindowSDL::WindowSDL()
 {

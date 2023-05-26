@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "Graphics.hpp"
+#include "core/Graphics.hpp"
 
 class Drawable
 {

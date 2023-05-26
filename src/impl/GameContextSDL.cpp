@@ -1,5 +1,5 @@
 
-#include "GameContextSDL.hpp"
+#include "core/impl/GameContextSDL.hpp"
 
 GameContextSDL::GameContextSDL()
 {
