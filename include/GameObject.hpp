@@ -25,6 +25,10 @@ public:
     {
         m_anims.emplace(name, anim);
     }
+    void set_animation(const std::string &name)
+    {
+        m_cur_anim = name;
+    }
     void set_pos(float x, float y)
     {
         this->x = x;
@@ -34,6 +38,7 @@ public:
     {
         Animation &anim = get_current_animation();
         float tpp = anim.get_time_per_tick();
+        m_anim_tick += dt;
         if (m_anim_tick > tpp)
         {
             anim.advance();
