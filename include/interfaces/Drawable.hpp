@@ -3,7 +3,7 @@
 
 #include <memory>
 
-class Graphics;
+#include <SDL2/SDL.h>
 
 class Drawable
 {
@@ -11,5 +11,5 @@ public:
     Drawable() {}
     virtual ~Drawable() = 0;
 
-    virtual void draw(Graphics &graphics) = 0;
+    virtual void draw(SDL_Renderer *rnd) = 0;
 };
