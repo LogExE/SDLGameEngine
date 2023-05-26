@@ -8,7 +8,9 @@
 #include <SDL2/SDL_image.h>
 
 #include "interfaces/GameState.hpp"
+#include "GameStateMain.hpp"
 #include "Player.hpp"
+#include "GroundBlock.hpp"
 
 class Game
 {
@@ -24,7 +26,7 @@ public:
     ~Game();
     void run();
     
-    void setState(std::unique_ptr<GameState> state)
+    void set_state(std::unique_ptr<GameState> state)
     {
         m_cur_state = std::move(state);
     }

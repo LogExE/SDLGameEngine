@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.hpp"
+#include "Game.hpp"
 
 class Player : public GameObject
 {

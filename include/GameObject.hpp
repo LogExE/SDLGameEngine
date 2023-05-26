@@ -1,7 +1,9 @@
 
 #pragma once
 
-#include "Game.hpp"
+#include <map>
+#include <string>
+
 #include "interfaces/Drawable.hpp"
 #include "Animation.hpp"
 

@@ -7,6 +7,8 @@ Game::Game()
     m_wnd = SDL_CreateWindow("mario", 500, 500, 1024, 768, SDL_WINDOW_SHOWN);
     m_rnd = SDL_CreateRenderer(m_wnd, -1, SDL_RENDERER_ACCELERATED);
     SDL_RenderSetLogicalSize(m_rnd, 256, 240);
+
+    m_cur_state = std::make_unique<GameStateMain>(*this);
 }
 
 Game::~Game()
@@ -25,6 +27,7 @@ void Game::run()
     double deltaTime = 0;
 
     Player plr(*this);
+    GroundBlock gr(*this);
 
     SDL_SetRenderDrawColor(m_rnd, 255, 255, 255, 255);
     while (running)
@@ -38,13 +41,7 @@ void Game::run()
             if (ev.type == SDL_QUIT)
                 running = false;
         }
-        plr.update(deltaTime); 
-
-        SDL_RenderClear(m_rnd);
-
-        plr.draw(m_rnd);
-
-        SDL_RenderPresent(m_rnd);
+        m_cur_state->begin();
     }
 }
 

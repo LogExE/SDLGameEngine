@@ -10,7 +10,6 @@ private:
 public:
     GameStateMain(Game &game);
 
-    void draw(Graphics &graphics);
-    void next();
-    void prev();
+    void begin();
+    void draw(SDL_Renderer *rnd);
 };

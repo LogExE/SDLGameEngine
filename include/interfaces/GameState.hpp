@@ -2,17 +2,17 @@
 #pragma once
 
 #include "Drawable.hpp"
-
 class Game;
 
-class GameState
+class GameState : public Drawable
 {
-private:
+protected:
     Game &m_game;
 public:
     GameState(Game &game) : m_game(game) {}
     virtual ~GameState() {};
 
-    virtual void next() = 0;
-    virtual void prev() = 0;
+    virtual void begin() = 0;
+
+    virtual void draw(SDL_Renderer *rnd) = 0;
 };
