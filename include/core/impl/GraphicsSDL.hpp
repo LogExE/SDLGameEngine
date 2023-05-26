@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-#include "Graphics.hpp"
+#include "core/Graphics.hpp"
 
 class GraphicsSDL : public Graphics
 {

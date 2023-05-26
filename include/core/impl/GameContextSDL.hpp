@@ -3,8 +3,8 @@
 
 #include <SDL2/SDL.h>
 
-#include "GameContext.hpp"
-#include "WindowSDL.hpp"
+#include "core/GameContext.hpp"
+#include "core/impl/WindowSDL.hpp"
 
 class GameContextSDL : public GameContext
 {

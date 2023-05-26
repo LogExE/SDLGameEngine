@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "GameContext.hpp"
-#include "GameState.hpp"
+#include "core/GameContext.hpp"
+#include "interfaces/GameState.hpp"
 
 class Game
 {

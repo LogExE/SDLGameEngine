@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "Game.hpp"
-#include "GameContextSDL.hpp"
+#include "core/impl/GameContextSDL.hpp"
 
 int main(int argc, char **argv)
 {
