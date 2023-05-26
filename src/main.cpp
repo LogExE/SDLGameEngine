@@ -4,11 +4,10 @@
 #include <memory>
 
 #include "Game.hpp"
-#include "core/impl/GameContextSDL.hpp"
 
 int main(int argc, char **argv)
 {
-    Game game(std::make_unique<GameContextSDL>());
+    Game game;
     game.run();
     
     return 0;

@@ -8,24 +8,17 @@
 
 class Window
 {
-protected:
+private:
     std::string m_title;
-    std::unique_ptr<Graphics> m_graphics;
+    SDL_Window *m_wnd;
+    Graphics m_graphics;
 public:
     inline const static std::string DEFAULT_TITLE = "";
-    Window() {}
-    virtual ~Window() {}
+    Window();
+    ~Window();
 
-    virtual void change_title(const std::string &title)
-    {
-        m_title = title;
-    }
-    std::string get_title() 
-    {
-        return m_title;
-    }
-    Graphics& get_graphics()
-    {
-        return *m_graphics;
-    }
+    void change_title(const std::string &title);
+
+    std::string get_title();
+    Graphics& get_graphics();
 };

@@ -1,18 +1,17 @@
 
-#include "core/impl/GameContextSDL.hpp"
+#include "core/GameContext.hpp"
 
-GameContextSDL::GameContextSDL()
+GameContext::GameContext()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
-    m_wnd = std::make_unique<WindowSDL>();
 }
 
-GameContextSDL::~GameContextSDL()
+GameContext::~GameContext()
 {
     SDL_Quit();
 }
 
-void GameContextSDL::process_events()
+void GameContext::process_events()
 {
     SDL_Event ev;
     while (SDL_PollEvent(&ev))

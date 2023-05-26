@@ -9,21 +9,20 @@
 class GameContext
 {
 protected:
-    std::unique_ptr<Window> m_wnd;
+    Window m_wnd;
     bool m_running = true;
 public:
-    GameContext() {}
-    virtual ~GameContext() {}
+    GameContext();
+    ~GameContext();
 
     Window &get_window()
     {
-        return *m_wnd;
+        return m_wnd;
     }
     bool is_running()
     {
         return m_running;
     }
 
-    virtual void process_events() = 0;
-    
+    void process_events();
 };
