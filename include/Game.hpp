@@ -3,14 +3,17 @@
 
 #include <string>
 
-#include "core/GameContext.hpp"
+#include <SDL2/SDL.h>
+
 #include "interfaces/GameState.hpp"
 
 class Game
 {
 private:
-    GameContext m_gctx;
     std::unique_ptr<GameState> m_cur_state;
+    SDL_Window *m_wnd;
+    SDL_Window *m_rnd;
+    bool running = false;
 
 public:
     Game();

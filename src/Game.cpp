@@ -2,19 +2,21 @@
 
 Game::Game()
 {
+    SDL_Init(SDL_INIT_EVERYTHING);
+    m_wnd = SDL_CreateWindow("mario", 500, 500, 1024, 768, SDL_WINDOW_SHOWN);
 }
 
 void Game::run()
 {
-    Window &window = m_gctx.get_window();
-    Graphics &graphics = window.get_graphics();
-    graphics.set_vsync(true);
-    window.change_title("haha");
-    while (m_gctx.is_running())
+    running = true;
+    while (running)
     {
-        m_gctx.process_events();
-        graphics.clear();
-        graphics.draw_line({{0, 0}, {500, 500}});
-        graphics.present();
+        SDL_Event ev;
+        while (SDL_PollEvent(&ev))
+        {
+            if (ev.type == SDL_QUIT)
+                running = false;
+        }
+        
     }
 }
