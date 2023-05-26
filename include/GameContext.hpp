@@ -13,7 +13,7 @@ protected:
     bool m_running = true;
 public:
     GameContext() {}
-    virtual ~GameContext() = 0;
+    virtual ~GameContext() {}
 
     Window &get_window()
     {

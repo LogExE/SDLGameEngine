@@ -12,9 +12,9 @@ protected:
     std::string m_title;
     std::unique_ptr<Graphics> m_graphics;
 public:
-    const static std::string DEFAULT_TITLE;
+    inline const static std::string DEFAULT_TITLE = "";
     Window() {}
-    virtual ~Window() = 0;
+    virtual ~Window() {}
 
     virtual void change_title(const std::string &title)
     {
