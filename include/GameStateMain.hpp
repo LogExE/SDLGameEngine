@@ -8,5 +8,9 @@ class GameStateMain : public GameState
 private:
     
 public:
-    GameStateMain();
+    GameStateMain(Game &game);
+
+    void draw(Graphics &graphics);
+    void next();
+    void prev();
 };
