@@ -13,7 +13,7 @@ public:
     GraphicsSDL(SDL_Window *wnd);
     ~GraphicsSDL();
 
-    void toggle_vsync();
+    void set_vsync(bool vsync);
     void set_draw_color(Color color);
 
     void draw_line(Line line);

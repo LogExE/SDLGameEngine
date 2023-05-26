@@ -17,9 +17,13 @@ public:
     Graphics() : m_draw_col(Color::black), m_vsync(false) {}
     virtual ~Graphics() = 0;
 
-    virtual void toggle_vsync()
+    void toggle_vsync()
     {
-        m_vsync ^= 1;
+        set_vsync(m_vsync ^= 1);
+    }
+    virtual void set_vsync(bool vsync)
+    {
+        m_vsync = vsync;
     }
     bool get_vsync()
     {

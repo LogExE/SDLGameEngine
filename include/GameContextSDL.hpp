@@ -11,4 +11,6 @@ class GameContextSDL : public GameContext
 public:
     GameContextSDL();
     ~GameContextSDL();
+
+    void process_events();
 };
