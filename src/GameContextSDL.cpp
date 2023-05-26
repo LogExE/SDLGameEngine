@@ -9,6 +9,15 @@ GameContextSDL::GameContextSDL()
 
 GameContextSDL::~GameContextSDL()
 {
-    SDL_Delay(1000);
     SDL_Quit();
+}
+
+void GameContextSDL::process_events()
+{
+    SDL_Event ev;
+    while (SDL_PollEvent(&ev))
+    {
+        if (ev.type == SDL_QUIT)
+            m_running = false;
+    }
 }

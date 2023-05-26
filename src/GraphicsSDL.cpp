@@ -11,9 +11,9 @@ GraphicsSDL::~GraphicsSDL()
     SDL_DestroyRenderer(m_rendr);
 }
 
-void GraphicsSDL::toggle_vsync()
+void GraphicsSDL::set_vsync(bool vsync)
 {
-    Graphics::toggle_vsync();
+    Graphics::set_vsync(vsync);
     SDL_RenderSetVSync(m_rendr, m_vsync);
 }
 
