@@ -10,6 +10,16 @@ Animation::Animation(SDL_Texture *txtr, int size)
     m_frm_w = w / size;
 }
 
+void Animation::set_time_per_tick(float time)
+{
+    m_timeptick = time;
+}
+
+float Animation::get_time_per_tick()
+{
+    return m_timeptick;
+}
+
 void Animation::advance()
 {
     m_cur_frame = (m_cur_frame + 1) % m_size;

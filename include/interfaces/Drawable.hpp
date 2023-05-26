@@ -9,7 +9,7 @@ class Drawable
 {
 public:
     Drawable() {}
-    virtual ~Drawable() = 0;
+    virtual ~Drawable() {};
 
     virtual void draw(SDL_Renderer *rnd) = 0;
 };

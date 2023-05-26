@@ -5,7 +5,7 @@
 
 class Game;
 
-class GameState : public Drawable
+class GameState
 {
 private:
     Game &m_game;
@@ -15,6 +15,4 @@ public:
 
     virtual void next() = 0;
     virtual void prev() = 0;
-
-    virtual void draw(Graphics &graphics) = 0;
 };

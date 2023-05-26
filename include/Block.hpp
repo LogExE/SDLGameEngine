@@ -1,7 +1,9 @@
 
 #pragma once
 
-class Block
+#include "GameObject.hpp"
+
+class Block : public GameObject
 {
 public:
     Block();
@@ -9,4 +11,6 @@ public:
 
     const static int WIDTH = 16;
     const static int HEIGHT = 16;
+
+    
 };
