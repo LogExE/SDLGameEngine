@@ -42,7 +42,7 @@ public:
 
     std::shared_ptr<InputProvider> get_keyboard();
 
-    void set_net_params(const std::string &ip, int port);
+    void set_net_params(bool host, const std::string &ip, int port);
     UDPsocket& get_socket();
     int get_chan();
 

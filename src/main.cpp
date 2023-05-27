@@ -8,12 +8,12 @@ int main(int argc, char **argv)
     Game game;
 
     std::ifstream in("netset.txt");
-    if (in.peek() != EOF)
     {
+        bool host;
         std::string ip;
         int port;
-        in >> ip >> port;
-        game.set_net_params(ip, port);
+        in >> host >> ip >> port;
+        game.set_net_params(host, ip, port);
     }
 
     game.run();

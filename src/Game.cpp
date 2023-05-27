@@ -76,14 +76,23 @@ std::shared_ptr<InputProvider> Game::get_keyboard()
     return m_keyboard;
 }
 
-void Game::set_net_params(const std::string &ip, int port)
+void Game::set_net_params(bool host, const std::string &ip, int port)
 {
+    m_host = host;
     m_ip = ip;
     m_port = port;
     IPaddress addr;
     SDLNet_ResolveHost(&addr, m_ip.c_str(), port);
-    m_sock = SDLNet_UDP_Open(0);
-    m_chan = SDLNet_UDP_Bind(m_sock, -1, &addr);
+    if (m_host)
+    {
+        m_sock = SDLNet_UDP_Open(port);
+        m_chan = SDLNet_UDP_Bind(m_sock, -1, &addr);
+    }
+    else
+    {
+        m_sock = SDLNet_UDP_Open(0);
+        m_chan = SDLNet_UDP_Bind(m_sock, -1, &addr);
+    }
 }
 
 UDPsocket& Game::get_socket()
