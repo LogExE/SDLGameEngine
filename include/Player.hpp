@@ -26,6 +26,7 @@ public:
     constexpr static float Y_ACC = 0.05;
     constexpr static float MAX_XSPEED = 0.1;
     constexpr static float MAX_YSPEED = 0.3;
+    //TODO: make running/walking
 
     inline static const std::string ANIM_WALK = "walk",
                                     ANIM_JUMP = "jump";
