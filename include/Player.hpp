@@ -35,9 +35,9 @@ public:
 
     constexpr static float X_ACC = 0.0002;
     constexpr static float X_DEC = 0.01;
-    constexpr static float Y_ACC = 0.02;
+    constexpr static float Y_ACC = 0.005;
     constexpr static float MAX_XSPEED = 0.1;
-    constexpr static float MAX_YSPEED = 0.3;
+    constexpr static float MAX_YSPEED = 0.2;
     constexpr static float JMP_SPEED = 0.1;
 
     inline static const std::string ANIM_WALK = "walk",

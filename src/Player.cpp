@@ -49,6 +49,13 @@ void Player::update(float dt)
 {
     GameObject::update(dt);
 
+    if (m_jumping)
+        set_animation(ANIM_JUMP);
+    else if (abs(xsp) > 1e-6)
+        set_animation(ANIM_WALK);
+    else set_animation(ANIM_IDLE);
+
+
     // TODO: remake, works bad on small fps
     if (m_input->check_input(Input::Left) && !brick_left_col())
     {
