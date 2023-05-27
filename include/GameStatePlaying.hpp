@@ -5,6 +5,8 @@
 #include <string>
 #include <memory>
 
+#include <SDL2/SDL_net.h>
+
 #include "interfaces/GameState.hpp"
 #include "GameObject.hpp"
 #include "Block.hpp"

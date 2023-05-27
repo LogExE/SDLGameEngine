@@ -6,6 +6,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "KeyboardProvider.hpp"
+#include "ArrayInputProvider.hpp"
 
 Game::Game()
 {
@@ -20,6 +21,7 @@ Game::Game()
     m_def_font = TTF_OpenFont(DEF_FONT.c_str(), DEF_FONTSIZE);
 
     m_keyboard = std::make_shared<KeyboardProvider>();
+    m_netprov = std::make_shared<ArrayInputProvider>();
 
     m_cur_state = std::make_unique<GameStateMain>(*this);
 }
@@ -74,6 +76,11 @@ void Game::clear_textures()
 std::shared_ptr<InputProvider> Game::get_keyboard()
 {
     return m_keyboard;
+}
+
+std::shared_ptr<InputProvider> Game::get_net_controls()
+{
+    return m_netprov;
 }
 
 void Game::set_net_params(bool host, const std::string &ip, int port)

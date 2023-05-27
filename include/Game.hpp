@@ -24,6 +24,7 @@ private:
     bool running = false;
     std::map<std::string, SDL_Texture*> m_txtrs;
     std::shared_ptr<InputProvider> m_keyboard;
+    std::shared_ptr<InputProvider> m_netprov;
     TTF_Font *m_def_font;
 
     bool m_host;
@@ -41,6 +42,7 @@ public:
     void clear_textures();
 
     std::shared_ptr<InputProvider> get_keyboard();
+    std::shared_ptr<InputProvider> get_net_controls();
 
     void set_net_params(bool host, const std::string &ip, int port);
     UDPsocket& get_socket();

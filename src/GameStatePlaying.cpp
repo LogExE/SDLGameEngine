@@ -34,6 +34,9 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
     auto plr = std::make_unique<Player>(*this, 10, 10);
     plr->set_input(m_game.get_keyboard());
     objs.push_back(std::move(plr));
+    auto plr2 = std::make_unique<Player>(*this, 20, 10);
+    plr2->set_input(m_game.get_net_controls());
+    objs.push_back(std::move(plr2));
 }
 
 void GameStatePlaying::begin(float deltaTime)
