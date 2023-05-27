@@ -2,6 +2,7 @@
 
 #include "GameObject.hpp"
 #include "Player.hpp"
+#include "interfaces/PlayerState.hpp"
 #include "Block.hpp"
 #include "Brick.hpp"
 #include "GroundBlock.hpp"

@@ -32,6 +32,7 @@ public:
 
     inline const static std::string ANIM_QUESTION = "question";
     inline const static std::string ANIM_HIT = "hit";
+    constexpr static float QUESTION_FLASH_TIME = 300;
 
     void collide_with(GameObject &obj);
 

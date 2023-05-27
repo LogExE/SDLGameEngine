@@ -67,6 +67,11 @@ bool GameObject::is_done()
     return m_done;
 }
 
+bool GameObject::is_player()
+{
+    return false;
+}
+
 SDL_FRect GameObject::get_collider()
 {
     SDL_FRect col;

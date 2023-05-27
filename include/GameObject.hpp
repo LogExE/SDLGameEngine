@@ -20,11 +20,12 @@ protected:
     bool m_done = false;
     std::map<std::string, Animation> m_anims;
     GameStatePlaying &m_game_state;
-    Animation& get_current_animation();
+    
 public:
     GameObject(GameStatePlaying &game);
     virtual ~GameObject();
 
+    Animation& get_current_animation();
     void add_animation(const std::string &name, Animation anim);
     void set_animation(const std::string &name);
     void set_pos(float x, float y);
@@ -33,6 +34,7 @@ public:
 
     bool collides_with(GameObject &other);
     bool is_done();
+    virtual bool is_player();
 
     SDL_FRect get_collider();
 

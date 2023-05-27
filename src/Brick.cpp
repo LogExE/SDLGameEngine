@@ -11,7 +11,7 @@ Brick::Brick(GameStatePlaying &game_state, BrickType type, BrickStyle style, int
 
     Game &game = game_state.get_game();
     add_animation(ANIM_IDLE, Animation(game.get_texture("brick.png"), 1));
-    add_animation(ANIM_QUESTION, Animation(game.get_texture("brick_question.png"), 4).set_time_per_tick(300));
+    add_animation(ANIM_QUESTION, Animation(game.get_texture("brick_question.png"), 4).set_time_per_tick(QUESTION_FLASH_TIME));
     add_animation(ANIM_HIT, Animation(game.get_texture("brick_hit.png"), 1));
     if (m_style == BrickStyle::Question)
         set_animation(ANIM_QUESTION);
