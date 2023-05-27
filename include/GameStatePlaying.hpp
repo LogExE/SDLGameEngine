@@ -8,19 +8,24 @@
 #include <SDL2/SDL_net.h>
 
 #include "interfaces/GameState.hpp"
+#include "interfaces/InputProvider.hpp"
 #include "GameObject.hpp"
 #include "Block.hpp"
 
-class InputProvider;
+class ArrayInputProvider;
 
 class GameStatePlaying : public GameState
 {
 private:
     std::vector<std::unique_ptr<GameObject>> objs;
     std::vector<std::vector<std::unique_ptr<Block>>> blocks;
+
+    std::shared_ptr<ArrayInputProvider> m_netprov;
+    UDPpacket *m_packet_send, *m_packet_recv;
     
 public:
     GameStatePlaying(Game &game, const std::string &lvl);
+    ~GameStatePlaying();
 
     void begin(float deltaTime);
 

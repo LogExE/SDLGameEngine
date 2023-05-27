@@ -7,6 +7,7 @@
 #include "Brick.hpp"
 #include "GroundBlock.hpp"
 #include "Game.hpp"
+#include "ArrayInputProvider.hpp"
 
 GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameState(game)
 {
@@ -35,8 +36,18 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
     plr->set_input(m_game.get_keyboard());
     objs.push_back(std::move(plr));
     auto plr2 = std::make_unique<Player>(*this, 20, 10);
-    plr2->set_input(m_game.get_net_controls());
+    m_netprov = std::make_shared<ArrayInputProvider>();
+    plr2->set_input(m_netprov);
     objs.push_back(std::move(plr2));
+
+    m_packet_recv = SDLNet_AllocPacket(1);
+    m_packet_send = SDLNet_AllocPacket(1);
+}
+
+GameStatePlaying::~GameStatePlaying()
+{
+    SDLNet_FreePacket(m_packet_recv);
+    SDLNet_FreePacket(m_packet_send);
 }
 
 void GameStatePlaying::begin(float deltaTime)
@@ -49,6 +60,19 @@ void GameStatePlaying::begin(float deltaTime)
         for (auto &blk : blks)
             if (blk)
                 blk->update(deltaTime);
+
+    auto enckeys = m_game.get_keyboard();
+    Uint8 data = 0;
+    for (auto inp : {Input::Left, Input::Down, Input::Left, Input::Right, Input::Jump, Input::Action})
+    {
+        data += enckeys->check_input(inp);
+        data <<= 1;
+    }
+    data >>= 1;
+    m_packet_send->data = &data;
+    SDLNet_UDP_Send(m_game.get_socket(), m_game.get_chan(), m_packet_send);
+    if (SDLNet_UDP_Recv(m_game.get_socket(), m_packet_recv) != 0)
+        m_netprov->set_array(*m_packet_recv->data);
 }
 
 void GameStatePlaying::draw(SDL_Renderer *rnd)
