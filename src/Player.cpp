@@ -14,7 +14,9 @@ Player::Player(GameStatePlaying &game_state, std::shared_ptr<InputProvider> inpu
     add_animation(ANIM_IDLE, Animation(game.get_texture("mario_idle.png"), 1));
     add_animation(ANIM_WALK, Animation(game.get_texture("mario_walk.png"), 3).set_time_per_tick(300));
     add_animation(ANIM_JUMP, Animation(game.get_texture("mario_jump.png"), 1));
-    // set_animation(ANIM_WALK);
+    m_col_w = 16;
+    m_col_h = 12;
+    //set_animation(ANIM_WALK);
 }
 
 void Player::update(float dt)
@@ -38,7 +40,7 @@ void Player::update(float dt)
     }
     else
     {
-        if (std::abs(xsp) <= X_DEC)
+        if (std::abs(xsp) <= 2 * X_DEC)
             xsp = 0;
         else if (xsp > 0)
             xsp -= X_DEC * dt;
@@ -56,8 +58,12 @@ void Player::update(float dt)
     x += xsp * dt;
     y += ysp * dt;
 
-    if (y > 100)
+    handle_collisions();
+}
+
+void Player::handle_collisions()
+{
+    if (m_game_state.has_block(x, y + m_col_h) || m_game_state.has_block(x + m_col_w, y + m_col_h))
         m_grounded = true;
-    else
-        m_grounded = false;
+    else m_grounded = false;
 }
