@@ -1,5 +1,10 @@
 #include "Game.hpp"
 
+#include "GameStateMain.hpp"
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
 Game::Game()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -26,10 +31,6 @@ void Game::run()
     Uint64 LAST = 0;
     double deltaTime = 0;
 
-    Player plr(*this);
-    GroundBlock gr(*this);
-
-    SDL_SetRenderDrawColor(m_rnd, 255, 255, 255, 255);
     while (running)
     {
         LAST = NOW;
@@ -41,8 +42,16 @@ void Game::run()
             if (ev.type == SDL_QUIT)
                 running = false;
         }
-        m_cur_state->begin();
+        m_cur_state->begin(deltaTime);
+        m_cur_state->draw(m_rnd);
     }
+}
+
+void Game::set_state(std::unique_ptr<GameState> state)
+{
+    SDL_Log("Switching state and clearing textures!");
+    m_txtrs.clear();
+    m_cur_state = std::move(state);
 }
 
 SDL_Texture *Game::get_texture(const std::string &name)

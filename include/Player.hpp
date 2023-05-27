@@ -1,7 +1,9 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "Game.hpp"
+
+class Game;
+class InputProvider;
 
 class Player : public GameObject
 {
@@ -12,6 +14,7 @@ private:
     int m_score = 0;
 public:
     Player(Game &game);
+    void set_input(std::shared_ptr<InputProvider> provider);
 
     void update(float dt);
 

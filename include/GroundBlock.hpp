@@ -2,7 +2,8 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "Game.hpp"
+
+class Game;
 
 class GroundBlock : public GameObject
 {

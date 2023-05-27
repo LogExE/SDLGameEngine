@@ -1,5 +1,7 @@
 #include "Player.hpp"
 
+#include "Game.hpp"
+
 Player::Player(Game &game)
 {
     add_animation(ANIM_IDLE, Animation(game.get_texture("mario_idle.png"), 1));
@@ -11,5 +13,6 @@ Player::Player(Game &game)
 void Player::update(float dt)
 {
     GameObject::update(dt);
-    x += 0.01 * dt * MAX_XSPEED;
+    
+    
 }

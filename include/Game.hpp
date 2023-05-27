@@ -3,14 +3,13 @@
 
 #include <string>
 #include <map>
+#include <memory>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+struct SDL_Texture;
+struct SDL_Window;
+struct SDL_Renderer;
 
-#include "interfaces/GameState.hpp"
-#include "GameStateMain.hpp"
-#include "Player.hpp"
-#include "GroundBlock.hpp"
+class GameState;
 
 class Game
 {
@@ -26,10 +25,7 @@ public:
     ~Game();
     void run();
     
-    void set_state(std::unique_ptr<GameState> state)
-    {
-        m_cur_state = std::move(state);
-    }
+    void set_state(std::unique_ptr<GameState> state);
 
     SDL_Texture* get_texture(const std::string &name);
     inline const static std::string ASSETS_FOLDER = "assets";

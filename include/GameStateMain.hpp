@@ -10,6 +10,6 @@ private:
 public:
     GameStateMain(Game &game);
 
-    void begin();
+    void begin(float deltaTime);
     void draw(SDL_Renderer *rnd);
 };
