@@ -5,8 +5,9 @@
 
 class KeyboardProvider : public InputProvider
 {
+private:
+    const Uint8 *keys;
 public:
     KeyboardProvider();
-
-    void check_input()
+    bool check_input(Input inp);
 };

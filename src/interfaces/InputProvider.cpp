@@ -1,4 +1,4 @@
-#include "InputProvider.hpp"
+#include "interfaces/InputProvider.hpp"
 
 InputProvider::InputProvider()
 {

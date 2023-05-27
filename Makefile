@@ -7,6 +7,7 @@ HEADERS := include
 SDL2FLAGS != pkg-config SDL2 --libs --cflags
 SDL2IMGFLAGS != pkg-config SDL2_image --libs --cflags
 EXECUTABLE := app
+DEPS := $(OBJS:.o=.d)
 
 all: $(SOURCES) $(EXECUTABLE)
 
@@ -15,7 +16,12 @@ $(EXECUTABLE): $(OBJS)
 	$(CC) $(OBJS) $(SDL2FLAGS) $(SDL2IMGFLAGS) -mconsole -o $(EXECUTABLE)
 
 .cpp.o:
-	$(CC) -I$(HEADERS) -c $< -o $@
+	$(CC) -I$(HEADERS) -MMD -c $< -o $@
+
+include $(DEPS)
+
+$(DEPS): ;
 
 clean:
 	del $(subst /,\, $(OBJS))
+	del $(subst /,\, $(DEPS))

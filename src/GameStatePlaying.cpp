@@ -3,10 +3,12 @@
 #include "GameObject.hpp"
 #include "Player.hpp"
 #include "GroundBlock.hpp"
+#include "KeyboardProvider.hpp"
 
 GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameState(game)
 {
-    objs.push_back(std::make_unique<Player>(game));
+    m_keyboard = std::make_shared<KeyboardProvider>();
+    objs.push_back(std::make_unique<Player>(game, m_keyboard));
     objs.push_back(std::make_unique<GroundBlock>(game));
 }
 
