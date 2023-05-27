@@ -12,7 +12,7 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
     blocks.resize(MAX_LVL_H);
     for (int i = 0; i < MAX_LVL_H; ++i)
         blocks[i].resize(MAX_LVL_W);
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 20; ++i)
     {
         auto new_block = std::make_unique<GroundBlock>(*this);
         new_block->set_pos(i * Block::SIZE, 100);
@@ -21,6 +21,12 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
     for (int i = 0; i < 5; ++i)
     {
         auto new_block = std::make_unique<Brick>(*this, BrickType::Usual, BrickStyle::None);
+        new_block->set_pos(i * Block::SIZE, 50);
+        blocks[50 / Block::SIZE][i] = std::move(new_block);
+    }
+    for (int i = 5; i < 10; ++i)
+    {
+        auto new_block = std::make_unique<Brick>(*this, BrickType::Coiny, BrickStyle::Question);
         new_block->set_pos(i * Block::SIZE, 50);
         blocks[50 / Block::SIZE][i] = std::move(new_block);
     }
