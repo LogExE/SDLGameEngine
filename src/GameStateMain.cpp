@@ -6,12 +6,12 @@
 
 #include "Game.hpp"
 #include "GameStatePlaying.hpp"
-#include "GameObject.hpp"
 #include "interfaces/InputProvider.hpp"
 
 
 GameStateMain::GameStateMain(Game &game) : GameState(game)
 {
+    test_texture = m_game.get_texture("test.png");
 }
 
 void GameStateMain::begin(float deltaTime)
@@ -24,5 +24,6 @@ void GameStateMain::draw(SDL_Renderer *rnd)
 {
     SDL_SetRenderDrawColor(rnd, 255, 255, 255, 255);
     SDL_RenderClear(rnd);
+    SDL_RenderCopy(rnd, test_texture, nullptr, nullptr);
     SDL_RenderPresent(rnd);
 }

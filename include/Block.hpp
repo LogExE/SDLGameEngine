@@ -8,9 +8,9 @@ class Block : public GameObject
 private:
     
 public:
-    Block();
+    Block(GameStatePlaying &game_state);
 
-    virtual void on_collide(GameObject &obj) {}
+    virtual void on_collide(GameObject &obj);
 
     const static int SIZE = 16;
 };

@@ -28,6 +28,7 @@ public:
     void run();
     
     void set_state(std::unique_ptr<GameState> state);
+    void clear_textures();
 
     std::shared_ptr<InputProvider> get_keyboard();
 

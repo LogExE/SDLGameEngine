@@ -4,7 +4,6 @@
 
 #include <memory>
 
-class Game;
 class InputProvider;
 
 class Player : public GameObject
@@ -15,14 +14,18 @@ private:
     bool m_invincible = false;
     int m_score = 0;
     std::shared_ptr<InputProvider> m_input;
+    float xsp, ysp;
 public:
-    Player(Game &game, std::shared_ptr<InputProvider> input);
+    Player(GameStatePlaying &game_state, std::shared_ptr<InputProvider> input);
     void set_input(std::shared_ptr<InputProvider> provider);
 
     void update(float dt);
 
-    constexpr static float MAX_XSPEED = 0.2;
-    constexpr static float MAX_YSPEED = 0.5;
+    constexpr static float X_ACC = 0.0002;
+    constexpr static float X_DEC = 0.01;
+    constexpr static float Y_ACC = 0.05;
+    constexpr static float MAX_XSPEED = 0.1;
+    constexpr static float MAX_YSPEED = 0.3;
 
     inline static const std::string ANIM_WALK = "walk",
                                     ANIM_JUMP = "jump";

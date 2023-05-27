@@ -2,17 +2,18 @@
 
 #include <SDL2/SDL_rect.h>
 
-Animation &GameObject::get_current_animation()
+GameObject::GameObject(GameStatePlaying &game_state) : m_game_state(game_state)
 {
-    return m_anims.find(m_cur_anim)->second;
-}
 
-GameObject::GameObject()
-{
 }
 
 GameObject::~GameObject()
 {
+}
+
+Animation &GameObject::get_current_animation()
+{
+    return m_anims.find(m_cur_anim)->second;
 }
 
 void GameObject::add_animation(const std::string &name, Animation anim)

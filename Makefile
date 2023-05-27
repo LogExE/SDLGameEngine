@@ -6,6 +6,7 @@ OBJS := $(SOURCES:.cpp=.o)
 HEADERS := include
 SDL2FLAGS != pkg-config SDL2 --libs --cflags
 SDL2IMGFLAGS != pkg-config SDL2_image --libs --cflags
+SDL2TTFFLAGS != pkg-config SDL2_ttf --libs --cflags
 EXECUTABLE := app
 DEPS := $(OBJS:.o=.d)
 
@@ -13,7 +14,7 @@ all: $(SOURCES) $(EXECUTABLE)
 
 # -mconsole to actually use SDL_Log
 $(EXECUTABLE): $(OBJS)
-	$(CC) $(OBJS) $(SDL2FLAGS) $(SDL2IMGFLAGS) -mconsole -o $(EXECUTABLE)
+	$(CC) $(OBJS) $(SDL2FLAGS) $(SDL2IMGFLAGS) $(SDL2TTFFLAGS) -mconsole -o $(EXECUTABLE)
 
 .cpp.o:
 	$(CC) -I$(HEADERS) -MMD -c $< -o $@

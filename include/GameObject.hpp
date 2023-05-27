@@ -7,6 +7,8 @@
 #include "interfaces/Drawable.hpp"
 #include "Animation.hpp"
 
+class GameStatePlaying;
+
 class GameObject : public Drawable
 {
 protected:
@@ -17,9 +19,10 @@ protected:
     bool m_flipped = false;
     bool m_done = false;
     std::map<std::string, Animation> m_anims;
+    GameStatePlaying &m_game_state;
     Animation& get_current_animation();
 public:
-    GameObject();
+    GameObject(GameStatePlaying &game);
     virtual ~GameObject();
 
     void add_animation(const std::string &name, Animation anim);

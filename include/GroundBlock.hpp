@@ -3,10 +3,8 @@
 
 #include "Block.hpp"
 
-class Game;
-
 class GroundBlock : public Block
 {
 public:
-    GroundBlock(Game &game);
+    GroundBlock(GameStatePlaying &game_state);
 };

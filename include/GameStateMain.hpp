@@ -3,10 +3,12 @@
 
 #include "interfaces/GameState.hpp"
 
+struct SDL_Texture;
+
 class GameStateMain : public GameState
 {
 private:
-    
+    SDL_Texture *test_texture;
 public:
     GameStateMain(Game &game);
 
