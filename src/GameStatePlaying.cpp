@@ -42,6 +42,7 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
 
     m_packet_recv = SDLNet_AllocPacket(1);
     m_packet_send = SDLNet_AllocPacket(1);
+    exit(0);
 }
 
 GameStatePlaying::~GameStatePlaying()
@@ -63,20 +64,22 @@ void GameStatePlaying::begin(float deltaTime)
 
     auto enckeys = m_game.get_keyboard();
     Uint8 data = 0;
-    for (auto inp : {Input::Left, Input::Down, Input::Left, Input::Right, Input::Jump, Input::Action})
+    for (auto inp : {Input::Up, Input::Down, Input::Left, Input::Right, Input::Jump, Input::Action})
     {
         data += enckeys->check_input(inp);
         data <<= 1;
     }
     data >>= 1;
     *m_packet_send->data = data;
+    m_packet_send->len = 1;
+    SDL_Log("Sending %d", data);
     if (!SDLNet_UDP_Send(m_game.get_socket(), m_game.get_chan(), m_packet_send))
         SDL_Log("Send failed... %s", SDLNet_GetError());
     int recv_res = SDLNet_UDP_Recv(m_game.get_socket(), m_packet_recv);
     if (recv_res == 1)
     {
         m_netprov->set_array(*m_packet_recv->data);
-        SDL_Log("%b", m_packet_recv->data);
+        SDL_Log("%d", *m_packet_recv->data);
     }
     else if (recv_res == -1)
         SDL_Log("Recv failed... %s", SDLNet_GetError());
