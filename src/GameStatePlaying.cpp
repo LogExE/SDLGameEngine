@@ -68,8 +68,8 @@ void GameStatePlaying::begin(float deltaTime)
         data += enckeys->check_input(inp);
         data <<= 1;
     }
-    data >>= 1;
-    m_packet_send->data = &data;
+    data >>= 1; 
+    *m_packet_send->data = data;
     SDLNet_UDP_Send(m_game.get_socket(), m_game.get_chan(), m_packet_send);
     if (SDLNet_UDP_Recv(m_game.get_socket(), m_packet_recv) != 0)
         m_netprov->set_array(*m_packet_recv->data);
