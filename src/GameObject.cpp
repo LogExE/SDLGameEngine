@@ -1,5 +1,7 @@
 #include "GameObject.hpp"
 
+#include <SDL2/SDL_rect.h>
+
 Animation &GameObject::get_current_animation()
 {
     return m_anims.find(m_cur_anim)->second;
@@ -51,4 +53,25 @@ void GameObject::draw(SDL_Renderer *rnd)
     dest.w = frame.w;
     dest.h = frame.h;
     SDL_RenderCopyExF(rnd, anim.get_texture(), &frame, &dest, 0, nullptr, m_flipped ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE);
+}
+
+bool GameObject::collides_with(GameObject &other)
+{
+    SDL_FRect ours = get_collider(), theirs = other.get_collider();
+    return SDL_IntersectFRect(&ours, &theirs, nullptr);
+}
+
+bool GameObject::is_done()
+{
+    return m_done;
+}
+
+SDL_FRect GameObject::get_collider()
+{
+    SDL_FRect col;
+    col.x = x;
+    col.y = y;
+    col.w = m_col_w;
+    col.h = m_col_h;
+    return col;
 }

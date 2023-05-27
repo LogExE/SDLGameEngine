@@ -10,6 +10,7 @@ struct SDL_Window;
 struct SDL_Renderer;
 
 class GameState;
+class InputProvider;
 
 class Game
 {
@@ -19,6 +20,7 @@ private:
     SDL_Renderer *m_rnd;
     bool running = false;
     std::map<std::string, SDL_Texture*> m_txtrs;
+    std::shared_ptr<InputProvider> m_keyboard;
 
 public:
     Game();
@@ -26,6 +28,8 @@ public:
     void run();
     
     void set_state(std::unique_ptr<GameState> state);
+
+    std::shared_ptr<InputProvider> get_keyboard();
 
     SDL_Texture* get_texture(const std::string &name);
     inline const static std::string ASSETS_FOLDER = "assets";

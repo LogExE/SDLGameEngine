@@ -7,6 +7,7 @@
 #include "Game.hpp"
 #include "GameStatePlaying.hpp"
 #include "GameObject.hpp"
+#include "interfaces/InputProvider.hpp"
 
 
 GameStateMain::GameStateMain(Game &game) : GameState(game)
@@ -15,7 +16,8 @@ GameStateMain::GameStateMain(Game &game) : GameState(game)
 
 void GameStateMain::begin(float deltaTime)
 {
-    m_game.set_state(std::make_unique<GameStatePlaying>(m_game, "test"));
+    if (m_game.get_keyboard()->check_input(Input::Jump))
+        m_game.set_state(std::make_unique<GameStatePlaying>(m_game, "test"));
 }
 
 void GameStateMain::draw(SDL_Renderer *rnd)

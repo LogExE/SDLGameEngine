@@ -1,11 +1,11 @@
 
 #pragma once
 
-#include "GameObject.hpp"
+#include "Block.hpp"
 
 class Game;
 
-class GroundBlock : public GameObject
+class GroundBlock : public Block
 {
 public:
     GroundBlock(Game &game);

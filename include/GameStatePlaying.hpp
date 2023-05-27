@@ -15,7 +15,7 @@ class GameStatePlaying : public GameState
 private:
     std::vector<std::unique_ptr<GameObject>> objs;
     int lives = START_LIVES;
-    std::shared_ptr<InputProvider> m_keyboard;
+    
 public:
     GameStatePlaying(Game &game, const std::string &lvl);
 

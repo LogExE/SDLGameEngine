@@ -5,6 +5,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "KeyboardProvider.hpp"
+
 Game::Game()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -12,6 +14,8 @@ Game::Game()
     m_wnd = SDL_CreateWindow("mario", 500, 500, 1024, 768, SDL_WINDOW_SHOWN);
     m_rnd = SDL_CreateRenderer(m_wnd, -1, SDL_RENDERER_ACCELERATED);
     SDL_RenderSetLogicalSize(m_rnd, 256, 240);
+
+    m_keyboard = std::make_shared<KeyboardProvider>();
 
     m_cur_state = std::make_unique<GameStateMain>(*this);
 }
@@ -52,6 +56,11 @@ void Game::set_state(std::unique_ptr<GameState> state)
     SDL_Log("Switching state and clearing textures!");
     m_txtrs.clear();
     m_cur_state = std::move(state);
+}
+
+std::shared_ptr<InputProvider> Game::get_keyboard()
+{
+    return m_keyboard;
 }
 
 SDL_Texture *Game::get_texture(const std::string &name)
