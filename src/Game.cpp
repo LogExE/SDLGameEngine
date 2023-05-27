@@ -13,7 +13,7 @@ Game::Game()
     IMG_Init(IMG_INIT_PNG);
     TTF_Init();
     SDLNet_Init();
-    m_wnd = SDL_CreateWindow("mario", 500, 500, 1024, 768, SDL_WINDOW_SHOWN);
+    m_wnd = SDL_CreateWindow("mario", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 768, SDL_WINDOW_SHOWN);
     m_rnd = SDL_CreateRenderer(m_wnd, -1, SDL_RENDERER_ACCELERATED);
     SDL_RenderSetLogicalSize(m_rnd, 256, 240);
 

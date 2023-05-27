@@ -48,8 +48,6 @@ void GameStatePlaying::begin(float deltaTime)
                 blk->update(deltaTime);
 }
 
-// TODO: draw only seen?
-
 void GameStatePlaying::draw(SDL_Renderer *rnd)
 {
     SDL_SetRenderDrawColor(rnd, 92, 148, 252, 255);
