@@ -21,6 +21,7 @@ void Player::update(float dt)
 {
     GameObject::update(dt);
 
+    //TODO: remake, works bad on small fps
     if (m_input->check_input(Input::Left))
     {
         if (xsp > 0)

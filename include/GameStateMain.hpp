@@ -11,6 +11,7 @@ private:
     SDL_Texture *test_texture;
 public:
     GameStateMain(Game &game);
+    ~GameStateMain();
 
     void begin(float deltaTime);
     void draw(SDL_Renderer *rnd);

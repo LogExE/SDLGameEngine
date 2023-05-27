@@ -5,6 +5,8 @@
 #include <map>
 #include <memory>
 
+#include <SDL2/SDL_ttf.h>
+
 struct SDL_Texture;
 struct SDL_Window;
 struct SDL_Renderer;
@@ -21,6 +23,7 @@ private:
     bool running = false;
     std::map<std::string, SDL_Texture*> m_txtrs;
     std::shared_ptr<InputProvider> m_keyboard;
+    TTF_Font *m_def_font;
 
 public:
     Game();
@@ -33,5 +36,8 @@ public:
     std::shared_ptr<InputProvider> get_keyboard();
 
     SDL_Texture* get_texture(const std::string &name);
+    SDL_Texture* get_text(const std::string &msg, const std::string &font, int size, SDL_Color color);
     inline const static std::string ASSETS_FOLDER = "assets";
+    inline const static std::string DEF_FONT = "Anonymous.ttf";
+    const static int DEF_FONTSIZE = 14;
 };

@@ -4,7 +4,6 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 
 #include "KeyboardProvider.hpp"
 
@@ -16,6 +15,8 @@ Game::Game()
     m_wnd = SDL_CreateWindow("mario", 500, 500, 1024, 768, SDL_WINDOW_SHOWN);
     m_rnd = SDL_CreateRenderer(m_wnd, -1, SDL_RENDERER_ACCELERATED);
     SDL_RenderSetLogicalSize(m_rnd, 256, 240);
+
+    m_def_font = TTF_OpenFont(DEF_FONT.c_str(), DEF_FONTSIZE);
 
     m_keyboard = std::make_shared<KeyboardProvider>();
 
@@ -43,7 +44,7 @@ void Game::run()
     {
         LAST = NOW;
         NOW = SDL_GetPerformanceCounter();
-        deltaTime = (double)((NOW - LAST)*1000 / (double)SDL_GetPerformanceFrequency() );
+        deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
         SDL_Event ev;
         while (SDL_PollEvent(&ev))
         {
@@ -82,4 +83,14 @@ SDL_Texture *Game::get_texture(const std::string &name)
             SDL_Log("Failed to load %s", name.c_str());
     }
     return m_txtrs[name];
+}
+
+SDL_Texture *Game::get_text(const std::string &msg, const std::string &font, int size, SDL_Color color)
+{
+    if (font != DEF_FONT || size != DEF_FONTSIZE)
+        return nullptr;
+    SDL_Surface *surf = TTF_RenderText_Blended(m_def_font, msg.c_str(), color);
+    SDL_Texture *ret = SDL_CreateTextureFromSurface(m_rnd, surf);
+    SDL_FreeSurface(surf);
+    return ret;
 }
