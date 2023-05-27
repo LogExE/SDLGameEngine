@@ -6,6 +6,11 @@ Block::Block(GameStatePlaying &game_state) : GameObject(game_state)
     m_col_h = SIZE;
 }
 
-void Block::on_collide(GameObject &obj)
+void Block::draw(SDL_Renderer *rnd)
+{
+    GameObject::draw(rnd);
+}
+
+void Block::collide_with(GameObject &obj)
 {
 }

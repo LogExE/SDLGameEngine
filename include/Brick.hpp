@@ -3,18 +3,37 @@
 
 #include "Block.hpp"
 
-enum BrickType
+struct SDL_Renderer;
+
+enum class BrickType
 {
     Usual,
     Mushroomy,
     Coiny
 };
 
-class Brick
+enum class BrickStyle
+{
+    None,
+    Question,
+    Hidden
+};
+
+class Brick : public Block
 {
 private:
-    int m_remaining = 0;
+    int m_remaining;
+    BrickType m_type;
+    BrickStyle m_style;
+    bool hit = false;
+
 public:
-    Brick(BrickType type, int remaining = 0);
-    ~Brick();
+    Brick(GameStatePlaying &game_state, BrickType type = BrickType::Usual, BrickStyle style = BrickStyle::None, int remaining = 0);
+
+    inline const static std::string ANIM_QUESTION = "question";
+    inline const static std::string ANIM_HIT = "hit";
+
+    void collide_with(GameObject &obj);
+
+    void draw(SDL_Renderer *rnd);
 };

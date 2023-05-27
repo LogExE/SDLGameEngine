@@ -10,7 +10,9 @@ private:
 public:
     Block(GameStatePlaying &game_state);
 
-    virtual void on_collide(GameObject &obj);
+    virtual void draw(SDL_Renderer *rnd);
+
+    virtual void collide_with(GameObject &obj);
 
     const static int SIZE = 16;
 };

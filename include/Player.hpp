@@ -18,12 +18,10 @@ private:
     int lives = START_LIVES;
 
 public:
-    Player(GameStatePlaying &game_state, std::shared_ptr<InputProvider> input);
+    Player(GameStatePlaying &game_state);
     void set_input(std::shared_ptr<InputProvider> provider);
 
     void update(float dt);
-
-    void handle_collisions();
 
     constexpr static float X_ACC = 0.0002;
     constexpr static float X_DEC = 0.01;

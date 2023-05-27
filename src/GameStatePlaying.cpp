@@ -3,6 +3,7 @@
 #include "GameObject.hpp"
 #include "Player.hpp"
 #include "Block.hpp"
+#include "Brick.hpp"
 #include "GroundBlock.hpp"
 #include "Game.hpp"
 
@@ -17,7 +18,15 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
         new_block->set_pos(i * Block::SIZE, 100);
         blocks[100 / Block::SIZE][i] = std::move(new_block);
     }
-    objs.push_back(std::make_unique<Player>(*this, m_game.get_keyboard()));
+    for (int i = 0; i < 5; ++i)
+    {
+        auto new_block = std::make_unique<Brick>(*this, BrickType::Usual, BrickStyle::None);
+        new_block->set_pos(i * Block::SIZE, 50);
+        blocks[50 / Block::SIZE][i] = std::move(new_block);
+    }
+    auto plr = std::make_unique<Player>(*this);
+    plr->set_input(m_game.get_keyboard());
+    objs.push_back(std::move(plr));
 }
 
 void GameStatePlaying::begin(float deltaTime)

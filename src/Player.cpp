@@ -6,24 +6,30 @@
 #include "Game.hpp"
 #include "Block.hpp"
 #include "interfaces/InputProvider.hpp"
+#include "EmptyInputProvider.hpp"
 
-Player::Player(GameStatePlaying &game_state, std::shared_ptr<InputProvider> input) : GameObject(game_state)
+Player::Player(GameStatePlaying &game_state) : GameObject(game_state)
 {
-    m_input = input;
+    m_input = std::make_shared<EmptyInputProvider>();
     Game &game = game_state.get_game();
     add_animation(ANIM_IDLE, Animation(game.get_texture("mario_idle.png"), 1));
     add_animation(ANIM_WALK, Animation(game.get_texture("mario_walk.png"), 3).set_time_per_tick(300));
     add_animation(ANIM_JUMP, Animation(game.get_texture("mario_jump.png"), 1));
     m_col_w = 16;
     m_col_h = 12;
-    //set_animation(ANIM_WALK);
+    // set_animation(ANIM_WALK);
+}
+
+void Player::set_input(std::shared_ptr<InputProvider> provider)
+{
+    m_input = provider;
 }
 
 void Player::update(float dt)
 {
     GameObject::update(dt);
 
-    //TODO: remake, works bad on small fps
+    // TODO: remake, works bad on small fps
     if (m_input->check_input(Input::Left))
     {
         if (xsp > 0)
@@ -58,12 +64,8 @@ void Player::update(float dt)
     x += xsp * dt;
     y += ysp * dt;
 
-    handle_collisions();
-}
-
-void Player::handle_collisions()
-{
     if (m_game_state.has_block(x, y + m_col_h) || m_game_state.has_block(x + m_col_w, y + m_col_h))
         m_grounded = true;
-    else m_grounded = false;
+    else
+        m_grounded = false;
 }

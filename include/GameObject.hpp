@@ -29,7 +29,7 @@ public:
     void set_animation(const std::string &name);
     void set_pos(float x, float y);
     virtual void update(float dt);
-    void draw(SDL_Renderer *rnd);
+    virtual void draw(SDL_Renderer *rnd);
 
     bool collides_with(GameObject &other);
     bool is_done();
