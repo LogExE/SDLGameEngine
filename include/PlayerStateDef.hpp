@@ -26,6 +26,4 @@ public:
     constexpr static float Y_ACC = 0.005;
     constexpr static float MAX_XSPEED = 0.1;
     constexpr static float MAX_YSPEED = 0.2;
-
-    
 };

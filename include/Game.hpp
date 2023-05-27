@@ -6,6 +6,7 @@
 #include <memory>
 
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_net.h>
 
 struct SDL_Texture;
 struct SDL_Window;
@@ -25,6 +26,12 @@ private:
     std::shared_ptr<InputProvider> m_keyboard;
     TTF_Font *m_def_font;
 
+    bool m_host;
+    std::string m_ip;
+    int m_port;
+    UDPsocket m_sock;
+    int m_chan;
+
 public:
     Game();
     ~Game();
@@ -35,9 +42,13 @@ public:
 
     std::shared_ptr<InputProvider> get_keyboard();
 
+    void set_net_params(const std::string &ip, int port);
+    UDPsocket& get_socket();
+    int get_chan();
+
     SDL_Texture* get_texture(const std::string &name);
     SDL_Texture* get_text(const std::string &msg, const std::string &font, int size, SDL_Color color);
     inline const static std::string ASSETS_FOLDER = "assets";
     inline const static std::string DEF_FONT = "Anonymous.ttf";
-    const static int DEF_FONTSIZE = 14;
+    const static int DEF_FONTSIZE = 28;
 };

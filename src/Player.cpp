@@ -10,7 +10,7 @@
 #include "interfaces/GameState.hpp"
 #include "PlayerStateDef.hpp"
 
-Player::Player(GameStatePlaying &game_state) : GameObject(game_state)
+Player::Player(GameStatePlaying &game_state, float x, float y) : GameObject(game_state)
 {
     m_input = std::make_shared<EmptyInputProvider>();
     m_state = std::make_unique<PlayerStateDef>(*this);
@@ -18,8 +18,13 @@ Player::Player(GameStatePlaying &game_state) : GameObject(game_state)
     add_animation(ANIM_IDLE, Animation(game.get_texture("mario_idle.png"), 1));
     add_animation(ANIM_WALK, Animation(game.get_texture("mario_walk.png"), 3).set_time_per_tick(300));
     add_animation(ANIM_JUMP, Animation(game.get_texture("mario_jump.png"), 1));
+    add_animation(ANIM_DEAD, Animation(game.get_texture("mario_dead.png"), 1));
     m_col_w = COL_W;
     m_col_h = COL_H;
+    this->x = x;
+    this->y = y;
+    spawn_x = x;
+    spawn_y = y;
 }
 
 void Player::set_input(std::shared_ptr<InputProvider> provider)
@@ -30,6 +35,12 @@ void Player::set_input(std::shared_ptr<InputProvider> provider)
 void Player::change_state(std::unique_ptr<PlayerState> state)
 {
     m_state = std::move(state);
+}
+
+void Player::reset_state()
+{
+    set_pos(spawn_x,spawn_y);
+    change_state(std::make_unique<PlayerStateDef>(*this));
 }
 
 bool Player::brick_left_col()

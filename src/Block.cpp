@@ -11,6 +11,6 @@ void Block::draw(SDL_Renderer *rnd)
     GameObject::draw(rnd);
 }
 
-void Block::collide_with(GameObject &obj)
+void Block::hit()
 {
 }

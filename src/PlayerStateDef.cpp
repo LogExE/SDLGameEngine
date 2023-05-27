@@ -3,6 +3,7 @@
 #include "Player.hpp"
 #include "interfaces/InputProvider.hpp"
 #include "PlayerStateJump.hpp"
+#include "PlayerStateDead.hpp"
 
 PlayerStateDef::PlayerStateDef(Player &plr) : PlayerState(plr)
 {
@@ -76,6 +77,9 @@ void PlayerStateDef::base_move(float dt)
         m_grounded = true;
     else
         m_grounded = false;
+
+    if (m_plr.m_input->check_input(Input::Action))
+        m_plr.change_state(std::make_unique<PlayerStateDead>(m_plr));
 }
 
 void PlayerStateDef::set_speeds(float xsp, float ysp)

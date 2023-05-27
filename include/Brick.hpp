@@ -25,7 +25,7 @@ private:
     int m_remaining;
     BrickType m_type;
     BrickStyle m_style;
-    bool hit = false;
+    bool m_hit = false;
 
 public:
     Brick(GameStatePlaying &game_state, BrickType type = BrickType::Usual, BrickStyle style = BrickStyle::None, int remaining = 0);
@@ -34,7 +34,7 @@ public:
     inline const static std::string ANIM_HIT = "hit";
     constexpr static float QUESTION_FLASH_TIME = 300;
 
-    void collide_with(GameObject &obj);
+    void hit();
 
     void draw(SDL_Renderer *rnd);
 };

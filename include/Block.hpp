@@ -12,7 +12,7 @@ public:
 
     virtual void draw(SDL_Renderer *rnd);
 
-    virtual void collide_with(GameObject &obj);
+    virtual void hit();
 
     const static int SIZE = 16;
 };

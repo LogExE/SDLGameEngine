@@ -31,13 +31,14 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
         new_block->set_pos(i * Block::SIZE, 50);
         blocks[50 / Block::SIZE][i] = std::move(new_block);
     }
-    auto plr = std::make_unique<Player>(*this);
+    auto plr = std::make_unique<Player>(*this, 10, 10);
     plr->set_input(m_game.get_keyboard());
     objs.push_back(std::move(plr));
 }
 
 void GameStatePlaying::begin(float deltaTime)
 {
+    std::vector<std::unique_ptr<GameObject>> objs_copy;
     for (auto &obj : objs)
         obj->update(deltaTime);
 
@@ -46,6 +47,8 @@ void GameStatePlaying::begin(float deltaTime)
             if (blk)
                 blk->update(deltaTime);
 }
+
+// TODO: draw only seen?
 
 void GameStatePlaying::draw(SDL_Renderer *rnd)
 {

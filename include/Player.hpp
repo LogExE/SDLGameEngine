@@ -14,17 +14,15 @@ private:
     std::shared_ptr<InputProvider> m_input;
     int m_score = 0;
     int m_lives = START_LIVES;
-
-    float xsp, ysp;
-    
-    float m_jumptime = 0;
+    float spawn_x, spawn_y;
 
 public:
-    Player(GameStatePlaying &game_state);
+    Player(GameStatePlaying &game_state, float x, float y);
     void set_input(std::shared_ptr<InputProvider> provider);
 
     std::unique_ptr<PlayerState> m_state;
     void change_state(std::unique_ptr<PlayerState> state);
+    void reset_state();
 
     bool brick_left_col();
     bool brick_right_col();
@@ -37,11 +35,13 @@ public:
     void decrease_lifes();
 
     inline static const std::string ANIM_WALK = "walk",
-                                    ANIM_JUMP = "jump";
+                                    ANIM_JUMP = "jump",
+                                    ANIM_DEAD = "dead";
     const static int START_LIVES = 3;
     constexpr static float JMP_TIME = 500;
     constexpr static float COL_W = 16;
     constexpr static float COL_H = 13;
     friend class PlayerStateDef;
     friend class PlayerStateJump;
+    friend class PlayerStateDead;
 };
