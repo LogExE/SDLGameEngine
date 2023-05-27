@@ -85,6 +85,8 @@ void Game::set_net_params(bool host, const std::string &ip, int port)
     SDLNet_ResolveHost(&addr, m_ip.c_str(), port);
     m_sock = SDLNet_UDP_Open(port);
     m_chan = SDLNet_UDP_Bind(m_sock, -1, &addr);
+    if (m_chan == -1)
+        SDL_Log("Bind for socket failed... %s", SDLNet_GetError());
 }
 
 UDPsocket &Game::get_socket()

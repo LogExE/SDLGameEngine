@@ -68,11 +68,18 @@ void GameStatePlaying::begin(float deltaTime)
         data += enckeys->check_input(inp);
         data <<= 1;
     }
-    data >>= 1; 
+    data >>= 1;
     *m_packet_send->data = data;
-    SDLNet_UDP_Send(m_game.get_socket(), m_game.get_chan(), m_packet_send);
-    if (SDLNet_UDP_Recv(m_game.get_socket(), m_packet_recv) != 0)
+    if (!SDLNet_UDP_Send(m_game.get_socket(), m_game.get_chan(), m_packet_send))
+        SDL_Log("Send failed... %s", SDLNet_GetError());
+    int recv_res = SDLNet_UDP_Recv(m_game.get_socket(), m_packet_recv);
+    if (recv_res == 1)
+    {
         m_netprov->set_array(*m_packet_recv->data);
+        SDL_Log("%b", m_packet_recv->data);
+    }
+    else if (recv_res == -1)
+        SDL_Log("Recv failed... %s", SDLNet_GetError());
 }
 
 void GameStatePlaying::draw(SDL_Renderer *rnd)
