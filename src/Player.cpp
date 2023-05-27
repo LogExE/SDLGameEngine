@@ -25,24 +25,46 @@ void Player::set_input(std::shared_ptr<InputProvider> provider)
     m_input = provider;
 }
 
+bool Player::brick_left_col()
+{
+    return m_game_state.has_block(x, y + m_col_h / 2);
+}
+
+bool Player::brick_right_col()
+{
+    return m_game_state.has_block(x + m_col_w, y + m_col_h / 2);
+}
+
+bool Player::brick_down_col()
+{
+    return m_game_state.has_block(x, y + m_col_h) || m_game_state.has_block(x + m_col_w, y + m_col_h);
+}
+
+bool Player::brick_up_col()
+{
+    return m_game_state.has_block(x, y) || m_game_state.has_block(x + m_col_w, y);
+}
+
 void Player::update(float dt)
 {
     GameObject::update(dt);
 
     // TODO: remake, works bad on small fps
-    if (m_input->check_input(Input::Left))
+    if (m_input->check_input(Input::Left) && !brick_left_col())
     {
         if (xsp > 0)
             xsp -= X_DEC * dt;
         else
             xsp -= X_ACC * dt;
+        m_flipped = true;
     }
-    else if (m_input->check_input(Input::Right))
+    else if (m_input->check_input(Input::Right) && !brick_right_col())
     {
         if (xsp < 0)
             xsp += X_DEC * dt;
         else
             xsp += X_ACC * dt;
+        m_flipped = false;
     }
     else
     {
@@ -55,17 +77,36 @@ void Player::update(float dt)
     }
     xsp = std::max(std::min(xsp, MAX_XSPEED), -MAX_XSPEED);
 
-    if (!m_grounded)
-        ysp += Y_ACC * dt;
+    if (m_grounded && !m_jumping)
+    {
+        if (!m_jumping)
+            ysp = 0;
+        if (m_input->check_input(Input::Jump))
+            m_jumping = true;
+    }
     else
-        ysp = 0;
+    {
+        if (m_jumping)
+        {
+            m_jumptime += dt;
+            ysp = -JMP_SPEED;
+            if (m_jumptime >= JMP_TIME || !m_input->check_input(Input::Jump))
+            {
+                m_jumping = false;
+                m_jumptime = 0;
+            }
+        }
+        else
+            ysp += Y_ACC * dt;
+    }
+
+    if (brick_down_col())
+        m_grounded = true;
+    else
+        m_grounded = false;
+
     ysp = std::max(std::min(ysp, MAX_YSPEED), -MAX_YSPEED);
 
     x += xsp * dt;
     y += ysp * dt;
-
-    if (m_game_state.has_block(x, y + m_col_h) || m_game_state.has_block(x + m_col_w, y + m_col_h))
-        m_grounded = true;
-    else
-        m_grounded = false;
 }

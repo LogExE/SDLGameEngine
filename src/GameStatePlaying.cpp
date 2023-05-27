@@ -57,7 +57,7 @@ void GameStatePlaying::draw(SDL_Renderer *rnd)
 
 bool GameStatePlaying::has_block(float x, float y)
 {
-    return blocks[round(y) / Block::SIZE][round(x) / Block::SIZE] != nullptr;
+    return x >= 0 && y >= 0 && blocks[round(y) / Block::SIZE][round(x) / Block::SIZE] != nullptr;
 }
 
 Game &GameStatePlaying::get_game()

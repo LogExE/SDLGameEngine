@@ -53,7 +53,7 @@ void GameObject::draw(SDL_Renderer *rnd)
     dest.y = y;
     dest.w = frame.w;
     dest.h = frame.h;
-    SDL_RenderCopyExF(rnd, anim.get_texture(), &frame, &dest, 0, nullptr, m_flipped ? SDL_FLIP_VERTICAL : SDL_FLIP_NONE);
+    SDL_RenderCopyExF(rnd, anim.get_texture(), &frame, &dest, 0, nullptr, m_flipped ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 bool GameObject::collides_with(GameObject &other)
