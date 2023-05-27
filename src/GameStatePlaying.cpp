@@ -42,7 +42,6 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
 
     m_packet_recv = SDLNet_AllocPacket(1);
     m_packet_send = SDLNet_AllocPacket(1);
-    exit(0);
 }
 
 GameStatePlaying::~GameStatePlaying()
@@ -64,7 +63,7 @@ void GameStatePlaying::begin(float deltaTime)
 
     auto enckeys = m_game.get_keyboard();
     Uint8 data = 0;
-    for (auto inp : {Input::Up, Input::Down, Input::Left, Input::Right, Input::Jump, Input::Action})
+    for (auto inp : {Input::Action, Input::Jump, Input::Right, Input::Left, Input::Down, Input::Up})
     {
         data += enckeys->check_input(inp);
         data <<= 1;
