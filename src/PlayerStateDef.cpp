@@ -34,7 +34,6 @@ void PlayerStateDef::update(float dt)
 
 void PlayerStateDef::base_move(float dt)
 {
-    // TODO: remake, works bad on small fps
     if (m_plr.m_input->check_input(Input::Left) && !m_plr.brick_left_col())
     {
         if (xsp > 0)
@@ -60,7 +59,7 @@ void PlayerStateDef::base_move(float dt)
         else if (xsp < 0)
             xsp += X_DEC * dt;
     }
-    
+
     if (m_grounded)
     {
         ysp = 0;

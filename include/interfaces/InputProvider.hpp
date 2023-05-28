@@ -2,7 +2,6 @@
 #pragma once
 
 #include <map>
-
 #include <SDL2/SDL_scancode.h>
 
 enum class Input
@@ -21,6 +20,6 @@ public:
     InputProvider();
     virtual ~InputProvider();
 
-    //execute
+    // execute
     virtual bool check_input(Input inp) = 0;
 };

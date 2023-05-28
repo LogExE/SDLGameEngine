@@ -1,9 +1,9 @@
 
 #pragma once
 
-#include "interfaces/GameState.hpp"
-
 #include <SDL2/SDL_net.h>
+
+#include "interfaces/GameState.hpp"
 
 struct SDL_Texture;
 

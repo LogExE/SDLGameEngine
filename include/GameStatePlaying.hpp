@@ -4,7 +4,6 @@
 #include <vector>
 #include <string>
 #include <memory>
-
 #include <SDL2/SDL_net.h>
 
 #include "interfaces/GameState.hpp"

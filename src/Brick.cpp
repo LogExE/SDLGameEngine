@@ -19,12 +19,12 @@ Brick::Brick(GameStatePlaying &game_state, BrickType type, BrickStyle style, int
 
 void Brick::hit()
 {
-    
 }
 
 void Brick::draw(SDL_Renderer *rnd)
 {
     if (m_style == BrickStyle::Hidden && !m_hit)
         return;
-    else Block::draw(rnd);
+    else
+        Block::draw(rnd);
 }

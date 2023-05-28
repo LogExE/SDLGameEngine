@@ -39,7 +39,7 @@ void Player::change_state(std::unique_ptr<PlayerState> state)
 
 void Player::reset_state()
 {
-    set_pos(spawn_x,spawn_y);
+    set_pos(spawn_x, spawn_y);
     change_state(std::make_unique<PlayerStateDef>(*this));
 }
 
@@ -71,7 +71,6 @@ bool Player::is_player()
 void Player::update(float dt)
 {
     GameObject::update(dt);
-
     m_state->update(dt);
 }
 

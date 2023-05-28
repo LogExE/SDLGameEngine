@@ -20,12 +20,12 @@ protected:
     bool m_done = false;
     std::map<std::string, Animation> m_anims;
     GameStatePlaying &m_game_state;
-    
+
 public:
     GameObject(GameStatePlaying &game);
     virtual ~GameObject();
 
-    Animation& get_current_animation();
+    Animation &get_current_animation();
     void add_animation(const std::string &name, Animation anim);
     void set_animation(const std::string &name);
     void set_pos(float x, float y);

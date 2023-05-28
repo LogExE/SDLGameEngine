@@ -4,7 +4,6 @@
 
 GameObject::GameObject(GameStatePlaying &game_state) : m_game_state(game_state)
 {
-
 }
 
 GameObject::~GameObject()

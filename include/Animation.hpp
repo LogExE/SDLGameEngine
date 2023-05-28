@@ -15,7 +15,7 @@ private:
 public:
     Animation(SDL_Texture *txtr, int size);
 
-    Animation& set_time_per_tick(float time);
+    Animation &set_time_per_tick(float time);
     float get_time_per_tick();
 
     void advance();

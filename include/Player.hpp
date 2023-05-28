@@ -1,11 +1,10 @@
 #pragma once
 
-#include "GameObject.hpp"
-
 #include <memory>
 
-class InputProvider;
+#include "GameObject.hpp"
 
+class InputProvider;
 class PlayerState;
 
 class Player : public GameObject

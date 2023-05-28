@@ -4,7 +4,6 @@
 #include <string>
 #include <map>
 #include <memory>
-
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_net.h>
 

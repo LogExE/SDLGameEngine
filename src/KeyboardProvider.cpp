@@ -29,8 +29,5 @@ bool KeyboardProvider::check_input(Input inp)
     case Input::Action:
         return keys[SDL_SCANCODE_X];
         break;
-    default:
-        42;
-        // probably unachievable
     }
 }
