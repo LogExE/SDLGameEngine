@@ -15,6 +15,7 @@ public:
 
     void update(float dt);
 
+    //параметры анимации
     constexpr static float DEAD_UP = 0.5;
     constexpr static float DELAY = 500;
     constexpr static float DEAD_UP_TIME = DELAY + 200;

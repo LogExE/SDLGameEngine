@@ -6,10 +6,13 @@
 class PlayerStateDef : public PlayerState
 {
 protected:
+    //стоит ли на земле игрок?
     bool m_grounded = false;
+    
     bool m_big = false;
     bool m_invincible = false;
 
+    //скорости
     float xsp = 0, ysp = 0;
 
 public:
@@ -21,6 +24,7 @@ public:
 
     void set_speeds(float xsp, float ysp);
 
+    //максимальные скорости, ускорение игрока
     constexpr static float X_ACC = 0.0002;
     constexpr static float X_DEC = 0.01;
     constexpr static float Y_ACC = 0.005;

@@ -15,6 +15,7 @@ PlayerStateDef::~PlayerStateDef()
 
 void PlayerStateDef::update(float dt)
 {
+    //смена анимации
     if (abs(xsp) > 1e-6)
     {
         m_plr.set_animation(Player::ANIM_WALK);
@@ -24,7 +25,7 @@ void PlayerStateDef::update(float dt)
         m_plr.set_animation(Player::ANIM_IDLE);
 
     if (m_grounded && m_plr.m_input->check_input(Input::Jump))
-    {
+    { //игрок прыгнул
         auto jump = std::make_unique<PlayerStateJump>(m_plr);
         jump->set_speeds(xsp, ysp);
         m_plr.change_state(std::move(jump));
@@ -34,6 +35,7 @@ void PlayerStateDef::update(float dt)
 
 void PlayerStateDef::base_move(float dt)
 {
+    //проверка ввода и наличия блоков сбоку
     if (m_plr.m_input->check_input(Input::Left) && !m_plr.brick_left_col())
     {
         if (xsp > 0)
@@ -50,7 +52,7 @@ void PlayerStateDef::base_move(float dt)
             xsp += X_ACC * dt;
         m_plr.m_flipped = false;
     }
-    else
+    else //если игрок ничего не нажал - снижаем его скорость
     {
         if (std::abs(xsp) <= 2 * X_DEC)
             xsp = 0;
@@ -61,14 +63,12 @@ void PlayerStateDef::base_move(float dt)
     }
 
     if (m_grounded)
-    {
         ysp = 0;
-    }
-    else
+    else //игрок падает
         ysp += Y_ACC * dt;
 
     set_speeds(xsp, ysp);
-
+    //обновление позиции
     m_plr.x += xsp * dt;
     m_plr.y += ysp * dt;
 
@@ -76,7 +76,7 @@ void PlayerStateDef::base_move(float dt)
         m_grounded = true;
     else
         m_grounded = false;
-
+    //при нажатии кнопки X игрок переходит в состояние "умер"
     if (m_plr.m_input->check_input(Input::Action))
         m_plr.change_state(std::make_unique<PlayerStateDead>(m_plr));
 }

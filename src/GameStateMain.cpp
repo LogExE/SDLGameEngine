@@ -23,6 +23,7 @@ GameStateMain::~GameStateMain()
 void GameStateMain::begin(float deltaTime)
 {
     if (m_game.get_keyboard()->check_input(Input::Jump))
+        //начало игрового процесса
         m_game.set_state(std::make_unique<GameStatePlaying>(m_game, "<placeholder>"));
 }
 

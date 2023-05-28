@@ -11,6 +11,8 @@ void ArrayInputProvider::set_array(int array)
 
 bool ArrayInputProvider::check_input(Input inp)
 {
+    //ввод закодирован в виде последовательности битов
+    //для его считывания используется набор операций на битах
     switch (inp)
     {
     case Input::Up:

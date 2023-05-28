@@ -5,6 +5,7 @@ Animation::Animation(SDL_Texture *txtr, int size)
     m_txtr = txtr;
     m_size = size;
     int w, h;
+    //считывание размеров всей текстуры
     SDL_QueryTexture(m_txtr, nullptr, nullptr, &w, &h);
     m_frm_h = h;
     m_frm_w = w / size;

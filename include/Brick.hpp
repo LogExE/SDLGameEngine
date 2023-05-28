@@ -5,6 +5,7 @@
 
 struct SDL_Renderer;
 
+//виды блока
 enum class BrickType
 {
     Usual,
@@ -12,6 +13,7 @@ enum class BrickType
     Coiny
 };
 
+//стиль отображения блока
 enum class BrickStyle
 {
     None,
@@ -22,9 +24,12 @@ enum class BrickStyle
 class Brick : public Block
 {
 private:
+    //сколько ударов еще может получить блок
     int m_remaining;
+    //свойства блока
     BrickType m_type;
     BrickStyle m_style;
+    //ударили ли блок?
     bool m_hit = false;
 
 public:
@@ -32,6 +37,7 @@ public:
 
     inline const static std::string ANIM_QUESTION = "question";
     inline const static std::string ANIM_HIT = "hit";
+    //скорость анимации для значка "?"
     constexpr static float QUESTION_FLASH_TIME = 300;
 
     void hit();

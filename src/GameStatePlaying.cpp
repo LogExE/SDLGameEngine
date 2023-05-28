@@ -11,6 +11,7 @@
 
 GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameState(game)
 {
+    //наполняем игровой мир
     blocks.resize(MAX_LVL_H);
     for (int i = 0; i < MAX_LVL_H; ++i)
         blocks[i].resize(MAX_LVL_W);
@@ -32,6 +33,7 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
         new_block->set_pos(i * Block::SIZE, 50);
         blocks[50 / Block::SIZE][i] = std::move(new_block);
     }
+    //создаем двух игроков
     auto plr = std::make_unique<Player>(*this, 10, 10);
     plr->set_input(m_game.get_keyboard());
     objs.push_back(std::move(plr));
@@ -39,7 +41,7 @@ GameStatePlaying::GameStatePlaying(Game &game, const std::string &lvl) : GameSta
     m_netprov = std::make_shared<ArrayInputProvider>();
     plr2->set_input(m_netprov);
     objs.push_back(std::move(plr2));
-
+    //выделяем два пакета для отправки/получения
     m_packet_recv = SDLNet_AllocPacket(1);
     m_packet_send = SDLNet_AllocPacket(1);
 }
@@ -63,19 +65,21 @@ void GameStatePlaying::begin(float deltaTime)
 
     auto enckeys = m_game.get_keyboard();
     Uint8 data = 0;
+    //кодирование нашего ввода
     for (auto inp : {Input::Action, Input::Jump, Input::Right, Input::Left, Input::Down, Input::Up})
     {
         data += enckeys->check_input(inp);
         data <<= 1;
     }
     data >>= 1;
+    //формируем пакет
     *m_packet_send->data = data;
     m_packet_send->len = 1;
-    SDL_Log("Sending %d", data);
+    SDL_Log("Sending %d", data); // отправляем
     if (!SDLNet_UDP_Send(m_game.get_socket(), m_game.get_chan(), m_packet_send))
         SDL_Log("Send failed... %s", SDLNet_GetError());
     int recv_res = SDLNet_UDP_Recv(m_game.get_socket(), m_packet_recv);
-    if (recv_res == 1)
+    if (recv_res == 1) //получено сообщение
     {
         m_netprov->set_array(*m_packet_recv->data);
         SDL_Log("%d", *m_packet_recv->data);

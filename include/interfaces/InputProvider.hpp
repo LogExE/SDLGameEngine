@@ -20,6 +20,7 @@ public:
     InputProvider();
     virtual ~InputProvider();
 
-    // execute
+    //получить состояние ввода
+    //своего рода метод execute паттерна Command
     virtual bool check_input(Input inp) = 0;
 };

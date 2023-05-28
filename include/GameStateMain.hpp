@@ -11,7 +11,6 @@ class GameStateMain : public GameState
 {
 private:
     SDL_Texture *m_text;
-    int knocked = 0;
 public:
     GameStateMain(Game &game);
     ~GameStateMain();
