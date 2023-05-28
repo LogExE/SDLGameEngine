@@ -25,7 +25,6 @@ private:
     std::shared_ptr<InputProvider> m_keyboard;
     TTF_Font *m_def_font;
 
-    bool m_host;
     std::string m_ip;
     int m_port;
     UDPsocket m_sock;
@@ -41,7 +40,7 @@ public:
 
     std::shared_ptr<InputProvider> get_keyboard();
 
-    void set_net_params(bool host, const std::string &ip, int port);
+    void set_net_params(const std::string &ip, int port);
     UDPsocket& get_socket();
     int get_chan();
 

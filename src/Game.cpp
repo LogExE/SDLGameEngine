@@ -75,9 +75,8 @@ std::shared_ptr<InputProvider> Game::get_keyboard()
     return m_keyboard;
 }
 
-void Game::set_net_params(bool host, const std::string &ip, int port)
+void Game::set_net_params(const std::string &ip, int port)
 {
-    m_host = host;
     m_ip = ip;
     m_port = port;
     IPaddress addr;
