@@ -4,7 +4,7 @@ CC := g++
 SOURCES := $(call rwildcard,src,*.cpp)
 OBJS := $(SOURCES:.cpp=.o)
 HEADERS := include
-SDL2FLAGS != pkg-config SDL2 --libs --cflags
+SDL2FLAGS != pkg-config SDL2 --libs --cflags --static
 SDL2IMGFLAGS != pkg-config SDL2_image --libs --cflags --static
 SDL2TTFFLAGS != pkg-config SDL2_ttf --libs --cflags --static
 SDL2NETFLAGS != pkg-config SDL2_net --libs --cflags --static
